@@ -1,0 +1,43 @@
+{
+  "name": "fs-cli",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "build": "tsc -p .",
+    "local": "npm i -g && fs-cli",
+    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
+    "postbuild": "npm run local"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "clear": "^0.1.0",
+    "cli-select": "^1.1.2",
+    "clipboard-cli": "^2.0.1",
+    "commander": "^8.1.0",
+    "figlet": "^1.5.2",
+    "fs-extra": "^10.0.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/clear": "^0.1.2",
+    "@types/figlet": "^1.5.4",
+    "@types/fs-extra": "^9.0.12",
+    "@types/node": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  },
+  "bin": {
+    "fs-cli": "./bin/index.js"
+  },
+  "main": "./bin/index.js"
+}

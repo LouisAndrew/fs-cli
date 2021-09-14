@@ -23,6 +23,7 @@ module.exports = {
         ts: 'never',
       },
     ],
+    'import/prefer-default-export': 0,
   },
   settings: {
     'import/parsers': {

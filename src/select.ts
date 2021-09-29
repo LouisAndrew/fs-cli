@@ -34,6 +34,7 @@ export const getRootSelect = () => {
 
 export const getFolderSelect = async (root: string) => {
   primary('Please select your project folder');
-  const folder = await getSelectValue([...readDir(getPath(root)), CLONE_SELECT_VALUE], 'Project folder');
-  return folder === CLONE_SELECT_VALUE ? clone(root, await input('Please enter the repository URL')) : folder;
+  const path = getPath(root);
+  const folder = await getSelectValue([...readDir(path), CLONE_SELECT_VALUE], 'Project folder');
+  return folder === CLONE_SELECT_VALUE ? clone(path, await input('Please enter the repository URL')) : folder;
 };

@@ -4,11 +4,9 @@ import { clone } from './clone';
 import { primary } from './out';
 import { readDir } from './readdir';
 import { input } from './in';
-import { CLONE_SELECT_VALUE } from './utils/const';
+import { CLONE_SELECT_VALUE, ROOTS } from './utils/const';
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
-
-const ROOTS = ['dev/ui', 'peepee', 'dev/backend', 'dev/util', 'dev/ui/libs'];
 
 export const getSelectValue = async (values: string[], message: string) => {
   const value: {dir: string} = await inquirer.prompt([{

@@ -1,10 +1,7 @@
 import untildify from 'untildify';
 import { readFileSync } from 'fs';
-import { error } from './src/out';
-
-type Config = {
- paths?: string[]
-}
+import { error } from './out';
+import { Config } from './types';
 
 export const getConfig = (): Config | null => {
   /**

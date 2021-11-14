@@ -30,7 +30,7 @@ export const getRootSelect = (paths: string[]) => {
   return getSelectValue(paths.sort((a, b) => a.localeCompare(b)), 'Root directory');
 };
 
-export const getFolderSelect = async (root: string) => {
+export const getFolderSelect = async (root: string): Promise<string | null> => {
   primary('Please select your project folder');
   const path = getPath(root);
   const folder = await getSelectValue([...readDir(path), CLONE_SELECT_VALUE, GO_BACK], 'Project folder');
@@ -38,8 +38,7 @@ export const getFolderSelect = async (root: string) => {
     case CLONE_SELECT_VALUE:
       return clone(path, await input('Please enter the repository URL'));
     case GO_BACK:
-      return '';
-      // return getRootSelect();
+      return null;
     default:
       return folder;
   }

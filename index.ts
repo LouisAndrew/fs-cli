@@ -6,7 +6,7 @@ import { spawn } from 'child_process';
 import { getFolderSelect, getRootSelect } from './src/select';
 import { error, primary, title } from './src/out';
 import { getPath } from './src/changedir';
-import { getConfig } from './getconfig';
+import { getConfig } from './src/getconfig';
 
 type CLIOptions = {
  /**
@@ -22,8 +22,6 @@ type CLIOptions = {
     .option('-r, --root <rootDir>', 'root folder directory')
     .parse(process.argv);
 
-  clear();
-
   const config = getConfig();
   if (!config) {
     return;
@@ -34,9 +32,14 @@ type CLIOptions = {
     return;
   }
 
-  const options = program.opts<CLIOptions>();
-  const root = options.root || await getRootSelect(config.paths);
-  const folder = await getFolderSelect(root);
+  let folder: string | null = null;
+  let root: string | null = null;
+  while (!folder || !root) {
+    clear();
+    const options = program.opts<CLIOptions>();
+    root = options.root || await getRootSelect(config.paths);
+    folder = await getFolderSelect(root);
+  }
 
   title();
   primary(`${folder} selected`);

@@ -24,6 +24,7 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 0,
+    'no-await-in-loop': 0,
   },
   settings: {
     'import/parsers': {

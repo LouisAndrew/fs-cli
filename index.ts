@@ -4,8 +4,9 @@ import clear from 'clear';
 import { program } from 'commander';
 import { spawn } from 'child_process';
 import { getFolderSelect, getRootSelect } from './src/select';
-import { primary, title } from './src/out';
+import { error, primary, title } from './src/out';
 import { getPath } from './src/changedir';
+import { getConfig } from './getconfig';
 
 type CLIOptions = {
  /**
@@ -23,8 +24,18 @@ type CLIOptions = {
 
   clear();
 
+  const config = getConfig();
+  if (!config) {
+    return;
+  }
+
+  if (!config.paths) {
+    error('`paths` attribute is empty');
+    return;
+  }
+
   const options = program.opts<CLIOptions>();
-  const root = options.root || await getRootSelect();
+  const root = options.root || await getRootSelect(config.paths);
   const folder = await getFolderSelect(root);
 
   title();

@@ -4,7 +4,7 @@ import { clone } from './clone';
 import { primary } from './out';
 import { readDir } from './readdir';
 import { input } from './in';
-import { CLONE_SELECT_VALUE, ROOTS } from './utils/const';
+import { CLONE_SELECT_VALUE, GO_BACK } from './utils/const';
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
@@ -25,14 +25,22 @@ export const getSelectValue = async (values: string[], message: string) => {
   return value.dir;
 };
 
-export const getRootSelect = () => {
+export const getRootSelect = (paths: string[]) => {
   primary('Please select a root directory');
-  return getSelectValue(ROOTS.sort((a, b) => a.localeCompare(b)), 'Root directory');
+  return getSelectValue(paths.sort((a, b) => a.localeCompare(b)), 'Root directory');
 };
 
 export const getFolderSelect = async (root: string) => {
   primary('Please select your project folder');
   const path = getPath(root);
-  const folder = await getSelectValue([...readDir(path), CLONE_SELECT_VALUE], 'Project folder');
-  return folder === CLONE_SELECT_VALUE ? clone(path, await input('Please enter the repository URL')) : folder;
+  const folder = await getSelectValue([...readDir(path), CLONE_SELECT_VALUE, GO_BACK], 'Project folder');
+  switch (folder) {
+    case CLONE_SELECT_VALUE:
+      return clone(path, await input('Please enter the repository URL'));
+    case GO_BACK:
+      return '';
+      // return getRootSelect();
+    default:
+      return folder;
+  }
 };

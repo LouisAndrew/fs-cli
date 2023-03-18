@@ -23,16 +23,12 @@ module.exports = {
         ts: 'never',
       },
     ],
+    'import/no-unresolved': 'off',
     'import/prefer-default-export': 0,
   },
   settings: {
     'import/parsers': {
-      '@typescript-eslint/parser': ['.ts'],
-    },
-    'import/resolver': {
-      node: {
-        extensions: ['.ts'],
-      },
+      '@typescript-eslint/parser': ['.ts', '.js'],
     },
   },
 };

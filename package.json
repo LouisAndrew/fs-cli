@@ -2,6 +2,7 @@
   "name": "fs-cli",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "build": "tsc -p .",
@@ -15,7 +16,7 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "clear": "^0.1.0",
-    "clipboard-cli": "^2.0.1",
+    "clipboardy": "3.0.0",
     "commander": "^8.1.0",
     "figlet": "^1.5.2",
     "fs-extra": "^10.0.0",
@@ -36,7 +37,7 @@
     "eslint-plugin-import": "^2.24.2",
     "nodemon": "^2.0.12",
     "ts-node": "^10.2.1",
-    "typescript": "^4.4.2"
+    "typescript": "5.0.2"
   },
   "bin": {
     "fs-cli": "./bin/index.js"
